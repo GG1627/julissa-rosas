@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/all";
 import SplitType from "split-type";
@@ -137,7 +137,6 @@ export default function Hero() {
     const locationsContainer = locationsContainerRef.current;
     const introCopy = introCopyRef.current;
     const titleHeading = titleRef.current;
-    const heroImage = heroImageRef.current;
 
     if (
       !projectsContainer ||
@@ -158,7 +157,6 @@ export default function Hero() {
     // Get all image elements
     const gridImages = gsap.utils.toArray(".img");
     const heroImageElement = document.querySelector(".hero-img");
-    const images = gridImages.filter((img) => img !== heroImageElement);
 
     // Initialize SplitType
     const introCopySplit = new SplitType(".intro-copy h3", {
@@ -191,7 +189,7 @@ export default function Hero() {
       projectsContainer.innerHTML = "";
       locationsContainer.innerHTML = "";
 
-      projectsData.forEach((project, index) => {
+      projectsData.forEach((project) => {
         const projectItem = document.createElement("div");
         projectItem.className = "project-item";
 

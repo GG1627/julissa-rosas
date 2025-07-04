@@ -8,7 +8,7 @@ function CameraModel() {
   const { scene } = useGLTF("/3d/camera.glb");
 
   // Auto-rotate the camera slowly
-  useFrame((state) => {
+  useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.005; // Slow constant rotation
     }
