@@ -114,24 +114,90 @@ export default function Hero() {
     // Also execute after a small delay to ensure it takes effect
     setTimeout(scrollToTop, 10);
 
-    // Store original body styles to restore later
+    // Store original styles to restore later
     const originalBodyStyles = {
       overflow: document.body.style.overflow,
       height: document.body.style.height,
       position: document.body.style.position,
       width: document.body.style.width,
+      top: document.body.style.top,
+      left: document.body.style.left,
     };
 
     const originalDocumentStyles = {
       overflow: document.documentElement.style.overflow,
+      height: document.documentElement.style.height,
     };
 
-    // Disable scrolling during animation
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    document.body.style.height = "100vh";
-    document.body.style.position = "fixed";
-    document.body.style.width = "100%";
+    // Enhanced scroll locking - prevent all forms of scrolling
+    const disableScroll = () => {
+      // Get current scroll position before locking
+      const scrollY = window.scrollY;
+
+      // Apply styles to prevent scrolling
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.height = "100%";
+
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100%";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+
+      // Prevent scroll events
+      document.addEventListener("wheel", preventDefault, { passive: false });
+      document.addEventListener("touchmove", preventDefault, {
+        passive: false,
+      });
+      document.addEventListener("keydown", preventScrollKeys, {
+        passive: false,
+      });
+    };
+
+    // Helper functions to prevent scrolling
+    const preventDefault = (e: Event) => {
+      e.preventDefault();
+    };
+
+    const preventScrollKeys = (e: KeyboardEvent) => {
+      const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40]; // space, page up/down, home, end, arrows
+      if (keys.includes(e.keyCode)) {
+        e.preventDefault();
+      }
+    };
+
+    // Enable scrolling function
+    const enableScroll = () => {
+      // Remove event listeners
+      document.removeEventListener("wheel", preventDefault);
+      document.removeEventListener("touchmove", preventDefault);
+      document.removeEventListener("keydown", preventScrollKeys);
+
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+
+      // Restore original styles
+      document.documentElement.style.overflow =
+        originalDocumentStyles.overflow || "auto";
+      document.documentElement.style.height =
+        originalDocumentStyles.height || "auto";
+
+      document.body.style.overflow = originalBodyStyles.overflow || "auto";
+      document.body.style.height = originalBodyStyles.height || "auto";
+      document.body.style.position = originalBodyStyles.position || "static";
+      document.body.style.width = originalBodyStyles.width || "auto";
+      document.body.style.top = originalBodyStyles.top || "auto";
+      document.body.style.left = originalBodyStyles.left || "auto";
+
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
+    };
+
+    // Start with scroll disabled
+    disableScroll();
 
     const projectsContainer = projectsContainerRef.current;
     const locationsContainer = locationsContainerRef.current;
@@ -145,12 +211,7 @@ export default function Hero() {
       !titleHeading
     ) {
       // Restore styles if component setup fails
-      document.documentElement.style.overflow =
-        originalDocumentStyles.overflow || "auto";
-      document.body.style.overflow = originalBodyStyles.overflow || "auto";
-      document.body.style.height = originalBodyStyles.height || "auto";
-      document.body.style.position = originalBodyStyles.position || "static";
-      document.body.style.width = originalBodyStyles.width || "auto";
+      enableScroll();
       return;
     }
 
@@ -439,11 +500,7 @@ export default function Hero() {
           ease: "power3.out",
           onComplete: () => {
             // Re-enable scrolling after animation completes
-            document.documentElement.style.overflow = "auto";
-            document.body.style.overflow = "auto";
-            document.body.style.height = "auto";
-            document.body.style.position = "static";
-            document.body.style.width = "auto";
+            enableScroll();
           },
         },
         "<"
@@ -460,22 +517,24 @@ export default function Hero() {
     init();
 
     // Enhanced cleanup function
-    return () => {
+    const cleanup = () => {
       // Kill any running GSAP animations to prevent memory leaks
       gsap.killTweensOf("*");
 
       // Restore original scroll behavior
-      document.documentElement.style.overflow =
-        originalDocumentStyles.overflow || "auto";
-      document.body.style.overflow = originalBodyStyles.overflow || "auto";
-      document.body.style.height = originalBodyStyles.height || "auto";
-      document.body.style.position = originalBodyStyles.position || "static";
-      document.body.style.width = originalBodyStyles.width || "auto";
+      enableScroll();
+
+      // Additional cleanup for any remaining styles
+      document.body.style.transform = "none";
+      document.body.style.margin = "0";
+      document.body.style.padding = "0";
     };
+
+    return cleanup;
   }, []); // Empty dependency array means this runs once when component mounts
 
   return (
-    <section id="home" className="hero-section overflow-x-hidden">
+    <section className="hero-section">
       <div className="overlay" ref={overlayRef}>
         {/* Projects */}
         <div className="projects">

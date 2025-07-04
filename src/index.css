@@ -3,16 +3,19 @@
 @font-face {
   font-family: Akkurat Mono;
   src: url("/fonts/Akkurat-Mono.woff") format("woff");
+  font-display: swap;
 }
 
 @font-face {
   font-family: PP Neue Montreal;
   src: url("/fonts/ppneuemontreal-bold.woff") format("woff");
+  font-display: swap;
 }
 
 @font-face {
   font-family: Druk;
   src: url("/fonts/Druk-Medium-Trial.woff") format("woff");
+  font-display: swap;
 }
 
 @theme {
@@ -21,28 +24,98 @@
   --font-druk: "Druk", sans-serif;
 }
 
-/* Reset default margins and padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+  /* More specific overflow handling */
+  html {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-/* Prevent horizontal overflow globally but allow vertical scrolling */
-html {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+/* Modern Minimal Scrollbar Styling */
+@layer components {
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(236, 161, 181, 0.4) transparent;
+  }
 
-body {
-  margin: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 0;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgba(236, 161, 181, 0.3);
+    border-radius: 3px;
+    transition: all 0.2s ease;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(236, 161, 181, 0.5);
+    transition: all 0.2s ease;
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background: rgba(236, 161, 181, 0.7);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Completely hide scrollbar on mobile devices for cleaner look */
+  @media (max-width: 768px) {
+    *::-webkit-scrollbar {
+      display: none;
+    }
+
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+
+  /* Special styling for dark sections */
+  .dark-scrollbar *::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .dark-scrollbar *::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .dark-scrollbar * {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
 }
 
 /* Contact page animations */

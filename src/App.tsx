@@ -1,10 +1,13 @@
 import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Hero from "./pages/Hero";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
 import Contact from "./pages/Contact";
+import FullGallery from "./pages/FullGallery";
 
-export default function App() {
+// Main portfolio page component
+function MainPortfolio() {
   useEffect(() => {
     // Global scroll to top on app mount/page reload
     const ensureScrollToTop = () => {
@@ -23,11 +26,22 @@ export default function App() {
   }, []);
 
   return (
-    <div className="w-full" style={{ overflow: "visible" }}>
+    <div className="w-full min-h-screen" style={{ overflow: "visible" }}>
       <Hero />
       <About />
       <Portfolio />
       <Contact />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPortfolio />} />
+        <Route path="/gallery" element={<FullGallery />} />
+      </Routes>
+    </Router>
   );
 }

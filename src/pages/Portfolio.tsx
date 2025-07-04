@@ -1,6 +1,38 @@
+import { useNavigate } from "react-router-dom";
 import GridMotion from "../components/GridMotion";
 
+const videos = [
+  "/videos/vid1.mp4",
+  "/videos/vid2.mp4",
+  "/videos/vid3.mp4",
+  "/videos/vid4.mp4",
+] as const;
+
+// Reusable phone-with-video component keeps markup tidy and consistent
+const PhoneVideo: React.FC<{ src: string }> = ({ src }) => (
+  <div className="relative">
+    {/* Phone Frame */}
+    <img
+      src="/images/phone.png"
+      alt="Phone Frame"
+      className="w-44 sm:w-52 md:w-60 lg:w-64 xl:w-72 h-auto max-w-full"
+    />
+    {/* Video positioned inside phone screen */}
+    <video
+      className="absolute top-[12%] left-[11%] w-[78%] h-[80%] object-cover z-10 rounded-lg"
+      autoPlay
+      loop
+      muted
+      playsInline
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  </div>
+);
+
 export default function Portfolio() {
+  const navigate = useNavigate();
+
   // Create array with all img1-img18, then cycle through to create more rows
   const portfolioItems = [
     "/images/img1.JPG",
@@ -56,18 +88,31 @@ export default function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="min-h-screen bg-[#e3e3db] overflow-x-hidden"
+      className="min-h-screen bg-[#e3e3db] overflow-hidden"
     >
       {/* Header */}
-      <div className="pt-8 md:pt-12 lg:pt-16 pb-4 md:pb-6 text-center relative z-10 px-6">
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black uppercase tracking-tight mb-4 md:mb-6">
-          Portfolio
-        </h2>
+      <div className=" pb-4 md:pb-6 relative z-10 px-6">
+        <div className="flex justify-between items-center mb-4 md:mb-6">
+          <div className="flex-1"></div>
+          <div className="flex-1 text-center">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black uppercase tracking-tight">
+              Portfolio
+            </h2>
+          </div>
+          <div className="flex-1 flex justify-end pr-4">
+            <button
+              onClick={() => navigate("/gallery")}
+              className="bg-black text-white px-4 py-2 text-sm font-semibold uppercase tracking-wide hover:bg-gray-800 transition-colors duration-300 border border-black hover:border-gray-800 cursor-pointer"
+            >
+              See All
+            </button>
+          </div>
+        </div>
         <div className="w-16 md:w-24 h-1 bg-black mx-auto"></div>
       </div>
 
       {/* GridMotion Container with gradient overlay */}
-      <div className="relative overflow-x-hidden">
+      <div className="relative overflow-hidden">
         {/* Top gradient overlay */}
         <div
           className="absolute top-0 left-0 right-0 h-20 z-10 pointer-events-none"
@@ -87,97 +132,13 @@ export default function Portfolio() {
       </div>
 
       {/* Video Section */}
-      <div className="bg-[#e3e3db] mt-[-100px] md:mt-[-150px] lg:mt-[-200px] pb-12 md:pb-20">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="bg-[#e3e3db] pb-12 md:pb-20">
+        <div className="mx-auto px-4 md:px-6">
           {/* Video Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12">
-            {/* Video 1 */}
-            <div className="relative flex justify-center">
-              <div className="relative">
-                {/* Phone Frame */}
-                <img
-                  src="/images/phone.png"
-                  alt="Phone Frame"
-                  className="w-48 sm:w-56 md:w-64 h-auto relative z-0 max-w-full"
-                />
-                {/* Video positioned inside phone screen */}
-                <video
-                  className="absolute top-[12%] left-[11%] w-[78%] h-[80%] object-cover z-10 rounded-lg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src="/videos/vid1.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </div>
-
-            {/* Video 2 */}
-            <div className="relative flex justify-center">
-              <div className="relative">
-                {/* Phone Frame */}
-                <img
-                  src="/images/phone.png"
-                  alt="Phone Frame"
-                  className="w-48 sm:w-56 md:w-64 h-auto relative z-0 max-w-full"
-                />
-                {/* Video positioned inside phone screen */}
-                <video
-                  className="absolute top-[12%] left-[11%] w-[78%] h-[80%] object-cover z-10 rounded-lg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src="/videos/vid2.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </div>
-
-            {/* Video 3 */}
-            <div className="relative flex justify-center">
-              <div className="relative">
-                {/* Phone Frame */}
-                <img
-                  src="/images/phone.png"
-                  alt="Phone Frame"
-                  className="w-48 sm:w-56 md:w-64 h-auto relative z-0 max-w-full"
-                />
-                {/* Video positioned inside phone screen */}
-                <video
-                  className="absolute top-[12%] left-[11%] w-[78%] h-[80%] object-cover z-10 rounded-lg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src="/videos/vid3.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </div>
-
-            {/* Video 4 */}
-            <div className="relative flex justify-center">
-              <div className="relative">
-                {/* Phone Frame */}
-                <img
-                  src="/images/phone.png"
-                  alt="Phone Frame"
-                  className="w-48 sm:w-56 md:w-64 h-auto relative z-0 max-w-full"
-                />
-                {/* Video positioned inside phone screen */}
-                <video
-                  className="absolute top-[12%] left-[11%] w-[78%] h-[80%] object-cover z-10 rounded-lg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src="/videos/vid4.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 place-items-center">
+            {videos.map((src) => (
+              <PhoneVideo key={src} src={src} />
+            ))}
           </div>
         </div>
       </div>
