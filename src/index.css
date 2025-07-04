@@ -28,14 +28,16 @@
   box-sizing: border-box;
 }
 
-/* Prevent horizontal overflow globally */
-html,
-body {
+/* Prevent horizontal overflow globally but allow vertical scrolling */
+html {
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;

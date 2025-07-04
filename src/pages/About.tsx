@@ -15,6 +15,13 @@ export default function About() {
   const experienceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Ensure proper scrolling behavior for this component
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+    document.body.style.position = "static";
+    document.body.style.width = "auto";
+
     // Set initial states
     gsap.set(
       [
@@ -163,10 +170,12 @@ export default function About() {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
+
   return (
     <section
       id="about"
-      className="min-h-screen bg-[#e3e3db] flex items-center justify-center px-6 py-20 overflow-x-hidden"
+      className="w-full bg-[#e3e3db] px-6 py-20"
+      style={{ overflow: "visible" }}
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
@@ -178,14 +187,14 @@ export default function About() {
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
           {/* Text Content */}
-          <div className="space-y-8 lg:pr-8">
+          <div className="space-y-8 pl-8 md:pl-12 lg:pl-16 ml-4 md:ml-6">
             <div
               ref={textRef}
               className="space-y-6 text-lg text-gray-800 leading-relaxed"
             >
-              <p className="text-xl text-black font-medium uppercase">
+              <p className="text-black font-akkurat text-sm uppercase leading-relaxed">
                 Hi, I'm Julissa Rosas, a <strong>Marketing</strong> and{" "}
                 <strong>Finance</strong> student at{" "}
                 <span className="font-bold" style={{ color: "#782f40" }}>
@@ -195,7 +204,7 @@ export default function About() {
                 <strong>brand development</strong>, and{" "}
                 <strong>creative strategy</strong>.
               </p>
-              <p className="uppercase">
+              <p className="text-black font-akkurat text-sm uppercase leading-relaxed">
                 My journey combines hands-on experience with small businesses
                 and a strong academic foundation to help brands grow through
                 thoughtful content, <strong>data-driven decisions</strong>, and
@@ -203,7 +212,7 @@ export default function About() {
                 to campus involvement and freelance projects, I'm constantly
                 exploring new ways to connect ideas with impact.
               </p>
-              <p className="uppercase">
+              <p className="text-black font-akkurat text-sm uppercase leading-relaxed">
                 When I'm not studying or working on brand projects, you'll find
                 me exploring local coffee shops, planning my next adventure, or
                 capturing moments from my travels. I believe every brand has a
@@ -213,37 +222,37 @@ export default function About() {
 
             {/* Skills/Interests */}
             <div ref={skillsRef} className="pt-6">
-              <h3 className="text-2xl font-bold text-black mb-6 uppercase tracking-wide">
+              <h3 className="text-3xl font-bold text-black mb-8 uppercase tracking-wide">
                 Core Skills
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <div className="skill-card bg-white p-4 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
-                  <span className="text-sm font-semibold uppercase tracking-wide">
+                <div className="skill-card bg-white p-5 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
+                  <span className="text-base font-semibold uppercase tracking-wide">
                     Social Media
                   </span>
                 </div>
-                <div className="skill-card bg-white p-4 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
-                  <span className="text-sm font-semibold uppercase tracking-wide">
+                <div className="skill-card bg-white p-5 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
+                  <span className="text-base font-semibold uppercase tracking-wide">
                     Brand Strategy
                   </span>
                 </div>
-                <div className="skill-card bg-white p-4 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
-                  <span className="text-sm font-semibold uppercase tracking-wide">
+                <div className="skill-card bg-white p-5 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
+                  <span className="text-base font-semibold uppercase tracking-wide">
                     Content Creation
                   </span>
                 </div>
-                <div className="skill-card bg-white p-4 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
-                  <span className="text-sm font-semibold uppercase tracking-wide">
+                <div className="skill-card bg-white p-5 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
+                  <span className="text-base font-semibold uppercase tracking-wide">
                     Data Analysis
                   </span>
                 </div>
-                <div className="skill-card bg-white p-4 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
-                  <span className="text-sm font-semibold uppercase tracking-wide">
+                <div className="skill-card bg-white p-5 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
+                  <span className="text-base font-semibold uppercase tracking-wide">
                     Visual Design
                   </span>
                 </div>
-                <div className="skill-card bg-white p-4 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
-                  <span className="text-sm font-semibold uppercase tracking-wide">
+                <div className="skill-card bg-white p-5 text-center border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300">
+                  <span className="text-base font-semibold uppercase tracking-wide">
                     Digital Marketing
                   </span>
                 </div>
@@ -253,10 +262,11 @@ export default function About() {
 
           {/* 3D Camera Model */}
           <div ref={cameraRef} className="flex items-center justify-center">
-            <div className="relative w-full h-[500px]">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Camera3D />
-              </div>
+            <div
+              className="relative w-full max-w-md mx-auto"
+              style={{ height: "500px" }}
+            >
+              <Camera3D />
             </div>
           </div>
         </div>
@@ -264,10 +274,10 @@ export default function About() {
         {/* Bottom Section */}
         <div ref={bottomRef} className="mt-24 pt-12 border-t border-gray-400">
           <div className="text-center space-y-4">
-            <p className="text-xl text-black font-semibold">
+            <p className="text-black font-semibold font-akkurat text-[0.7rem] uppercase">
               Currently based in Tallahassee, FL
             </p>
-            <p className="text-lg text-gray-600">
+            <p className="text-gray-600 font-akkurat text-[0.7rem] uppercase">
               Open to <strong>internships</strong>,{" "}
               <strong>social media positions</strong>, and{" "}
               <strong>brand collaborations</strong>
@@ -289,7 +299,7 @@ export default function About() {
 
           {/* Experience Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-            <div className="experience-card">
+            <div className="experience-card overflow-visible">
               <TiltedCard
                 captionText="Bean Trolley Cafe"
                 containerHeight="400px"
@@ -331,7 +341,7 @@ export default function About() {
               />
             </div>
 
-            <div className="experience-card">
+            <div className="experience-card overflow-visible">
               <TiltedCard
                 captionText="Delta Nu Zeta"
                 containerHeight="400px"
@@ -375,7 +385,7 @@ export default function About() {
               />
             </div>
 
-            <div className="experience-card">
+            <div className="experience-card overflow-visible">
               <TiltedCard
                 captionText="The Finance Society"
                 containerHeight="400px"

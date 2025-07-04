@@ -101,8 +101,30 @@ export default function Hero() {
   const loaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Scroll to top on page load/reload
-    window.scrollTo(0, 0);
+    // Enhanced scroll to top on page load/reload
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    // Execute immediately
+    scrollToTop();
+
+    // Also execute after a small delay to ensure it takes effect
+    setTimeout(scrollToTop, 10);
+
+    // Store original body styles to restore later
+    const originalBodyStyles = {
+      overflow: document.body.style.overflow,
+      height: document.body.style.height,
+      position: document.body.style.position,
+      width: document.body.style.width,
+    };
+
+    const originalDocumentStyles = {
+      overflow: document.documentElement.style.overflow,
+    };
 
     // Disable scrolling during animation
     document.documentElement.style.overflow = "hidden";
@@ -123,6 +145,13 @@ export default function Hero() {
       !introCopy ||
       !titleHeading
     ) {
+      // Restore styles if component setup fails
+      document.documentElement.style.overflow =
+        originalDocumentStyles.overflow || "auto";
+      document.body.style.overflow = originalBodyStyles.overflow || "auto";
+      document.body.style.height = originalBodyStyles.height || "auto";
+      document.body.style.position = originalBodyStyles.position || "static";
+      document.body.style.width = originalBodyStyles.width || "auto";
       return;
     }
 
@@ -432,16 +461,18 @@ export default function Hero() {
     // Start the animation when component mounts
     init();
 
-    // Cleanup function
+    // Enhanced cleanup function
     return () => {
       // Kill any running GSAP animations to prevent memory leaks
       gsap.killTweensOf("*");
-      // Re-enable scrolling in case component unmounts during animation
-      document.documentElement.style.overflow = "auto";
-      document.body.style.overflow = "auto";
-      document.body.style.height = "auto";
-      document.body.style.position = "static";
-      document.body.style.width = "auto";
+
+      // Restore original scroll behavior
+      document.documentElement.style.overflow =
+        originalDocumentStyles.overflow || "auto";
+      document.body.style.overflow = originalBodyStyles.overflow || "auto";
+      document.body.style.height = originalBodyStyles.height || "auto";
+      document.body.style.position = originalBodyStyles.position || "static";
+      document.body.style.width = originalBodyStyles.width || "auto";
     };
   }, []); // Empty dependency array means this runs once when component mounts
 
