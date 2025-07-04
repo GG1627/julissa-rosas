@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Akkurat Mono;
+  src: url("/fonts/Akkurat-Mono.woff") format("woff");
+}
+
+@font-face {
+  font-family: PP Neue Montreal;
+  src: url("/fonts/ppneuemontreal-bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Druk;
+  src: url("/fonts/Druk-Medium-Trial.woff") format("woff");
+}
+
+@theme {
+  --font-akkurat-mono: "Akkurat Mono", monospace;
+  --font-pp-neue-montreal: "PP Neue Montreal", sans-serif;
+  --font-druk: "Druk", sans-serif;
+}
+
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow globally */
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Contact page animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}

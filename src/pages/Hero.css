@@ -1,0 +1,289 @@
+/* Global styles that should only apply to Hero */
+.hero-section body {
+  font-family: "PP Neue Montreal", sans-serif;
+  background-color: #e3e3db;
+  overflow-x: hidden;
+}
+
+.hero-section html {
+  overflow-x: hidden;
+}
+
+.hero-section {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "PP Neue Montreal", sans-serif;
+  background-color: #e3e3db;
+}
+
+.hero-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-section p {
+  /* text-transform: uppercase; */
+  font-family: "Akkurat Mono", monospace;
+  font-size: 0.7rem;
+}
+
+.hero-section a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Akkurat Mono", monospace;
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: #000000;
+}
+
+.hero-section .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 2em;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  gap: 2em;
+  overflow: hidden;
+}
+
+.hero-section .projects,
+.hero-section .loader,
+.hero-section .locations {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2em;
+}
+
+.hero-section .loader {
+  align-items: center;
+  gap: 0;
+  flex: 1.5;
+}
+
+.hero-section .loader h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Druk", sans-serif;
+  font-size: 2.5rem;
+  /* font-style: italic; */
+  /* fix this ^ */
+  line-height: 0.9;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(0deg, #3a3a3a, #3a3a3a 50%, #fff 0);
+  background-size: 100% 200%;
+  background-position: 0% 100%;
+  color: #3a3a3a;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.hero-section .projects-header,
+.hero-section .project-item,
+.hero-section .locations-header,
+.hero-section .location-item {
+  display: flex;
+  gap: 2em;
+  opacity: 0;
+}
+
+.hero-section .projects-header > *,
+.hero-section .locations-header > *,
+.hero-section .project-item > * {
+  flex: 1;
+}
+
+.hero-section .locations {
+  align-items: flex-start;
+}
+
+.hero-section .project-item,
+.hero-section .location-item {
+  color: #4f4f4f;
+}
+
+.hero-section .image-grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  z-index: 2;
+}
+
+.hero-section .grid-row {
+  width: 100%;
+  display: flex;
+  gap: 1em;
+}
+
+.hero-section .img {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 1;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
+.hero-section nav {
+  position: fixed;
+  width: 100vw;
+  padding: 1em;
+  display: flex;
+  gap: 2em;
+  z-index: 1000;
+  mix-blend-mode: difference;
+}
+
+.hero-section nav > * {
+  flex: 1;
+}
+
+.hero-section .links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.hero-section .links a {
+  color: #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.5em 0.8em;
+  border-radius: 2px;
+  mix-blend-mode: normal;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section .nav-logo {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-section .nav-logo a {
+  font-family: "Druk", sans-serif;
+  font-size: 1.75rem;
+  font-weight: bolder;
+  font-style: italic;
+  line-height: 0.9;
+  color: #ffffff;
+}
+
+.hero-section .banner-img {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 20%;
+  aspect-ratio: 4/5;
+}
+
+.hero-section .intro-copy {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 0 8em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-section .title {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-section .intro-copy h3,
+.hero-section .title h3 {
+  position: relative;
+  text-transform: uppercase;
+  color: #000;
+  font-family: "Druk", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 0.9;
+}
+
+.hero-section .title h1 {
+  font-family: "Druk", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 0.9;
+  text-transform: uppercase;
+  padding-right: 0.2em;
+}
+
+.hero-section .intro-copy h3 {
+  font-size: 1.5rem;
+  padding-right: 0.2em;
+}
+
+.hero-section .intro-copy h3,
+.hero-section .title h1 {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.hero-section .intro-copy h3 .word,
+.hero-section .title h1 .word {
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+  margin-right: 0.1em;
+}
+
+@media (max-width: 900px) {
+  .hero-section .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-section .projects,
+  .hero-section .locations,
+  .hero-section .intro-copy,
+  .hero-section .banner-img {
+    display: none;
+  }
+
+  .hero-section .title {
+    width: 100%;
+    bottom: 20%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-section .title h1 {
+    font-family: "Druk", sans-serif;
+    font-size: 2.5rem;
+  }
+
+  .hero-section .image-grid {
+    width: 75%;
+    gap: 0.5em;
+  }
+
+  .hero-section .grid-row {
+    width: 95%;
+    justify-content: space-between;
+    gap: 0.5em;
+  }
+}
